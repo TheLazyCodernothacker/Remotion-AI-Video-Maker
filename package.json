@@ -1,0 +1,11 @@
+{
+  "name": "remotion-ai-video-maker",
+  "version": "1.0.0",
+  "description": "gonna be sigma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
