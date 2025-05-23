@@ -1,13 +1,15 @@
 //write a file in ./output/src/Composition.tsx
 
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
-export async function createFile(fs, path) {
-  const outputDir = path.join(__dirname, "output", "src");
-  const fileName = "Composition.tsx";
+export async function createFile(content, fileName = "Composition.tsx") {
+  const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+  const __dirname = path.dirname(__filename);
+  const outputDir = path.join(__dirname, "../src");
   const filePath = path.join(outputDir, fileName);
-  const fileContent = "";
+  const fileContent = content || ""; // Default to empty string if no content is provided
 
   // Create the output directory if it doesn't exist
   if (!fs.existsSync(outputDir)) {
@@ -22,6 +24,7 @@ export async function createFile(fs, path) {
     }
   });
 }
+
 // This code creates a directory called 'output/src' if it doesn't exist and writes an empty file named 'Composition.tsx' in that directory.
 // The file is created in the same directory as this script.
 // You can modify the fileContent variable to add content to the file.

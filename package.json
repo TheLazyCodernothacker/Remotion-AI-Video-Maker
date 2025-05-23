@@ -6,7 +6,10 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@google/genai": "^1.0.1",
+    "@mui/material": "^7.1.0",
     "@remotion/cli": "4.0.305",
     "@remotion/tailwind-v4": "4.0.305",
     "dotenv": "^16.5.0",
@@ -27,7 +30,7 @@
     "typescript": "5.8.2"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon test/src/server/main.js",
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
@@ -35,5 +38,6 @@
   },
   "sideEffects": [
     "*.css"
-  ]
+  ],
+  "type": "module"
 }
