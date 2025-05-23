@@ -1,156 +1,52 @@
 import React from 'react';
-import {
-	AbsoluteFill,
-	interpolate,
-	spring,
-	useCurrentFrame,
-	useVideoConfig,
-	staticValue,
-	Sequence,
-	Img,
-	useReducedMotion,
-} from 'remotion';
-import { Typography, Grid, Paper } from '@material-ui/core';
+import { Composition, useCurrentFrame, useVideoConfig, AbsoluteFill, Easing, interpolate, Img } from 'remotion';
+import { Typography } from '@mui/material';
 
-// Remotion doesn't provide explicit Tailwind support out of the box
-// so we're defining styles here.  Feel free to extend.
+export default function MyComposition() {
+  const frame = useCurrentFrame();
+  const { fps, height, width } = useVideoConfig();
 
-const Title = ({ children }) => {
-	return (
-		<Typography variant="h4" align="center" className="text-white font-bold">
-			{children}
-		</Typography>
-	);
-};
+  const scale = interpolate(
+    frame,
+    [0, 30],
+    [0, 1.2],
+    {
+      extrapolateLeft: 'clampEnd',
+      extrapolateRight: 'clampEnd',
+      easing: Easing.easeOut(Easing.elastic(1.5)),
+    }
+  );
 
-const BodyText = ({ children }) => {
-	return (
-		<Typography variant="body1" align="center" className="text-gray-300">
-			{children}
-		</Typography>
-	);
-};
+  const rotate = interpolate(
+    frame,
+    [0, 30],
+    [0, 360 * 3],
+    {
+      extrapolateLeft: 'clampEnd',
+      extrapolateRight: 'clampEnd',
+      easing: Easing.linear,
+    }
+  );
+    const opacity = interpolate(
+      frame,
+      [0, 15, 30],
+      [0, 1, 0],
+      {
+          extrapolateLeft: "clampEnd",
+          extrapolateRight: "clampStart"
+      }
+  )
 
-const AnimatedScale = ({ children, startFrame, endFrame, scaleFrom = 0, scaleTo = 1 }) => {
-	const frame = useCurrentFrame();
-	const { fps } = useVideoConfig();
-
-	const scale = interpolate(
-		frame,
-		[startFrame, endFrame],
-		[scaleFrom, scaleTo],
-		{ extrapolationRight: 'clamp' }
-	);
-
-	return (
-		<div style={{ transform: `scale(${scale})` }}>
-			{children}
-		</div>
-	);
-};
-
-const AnimatedOpacity = ({ children, startFrame, endFrame, opacityFrom = 0, opacityTo = 1 }) => {
-	const frame = useCurrentFrame();
-	const { fps } = useVideoConfig();
-
-	const opacity = interpolate(
-		frame,
-		[startFrame, endFrame],
-		[opacityFrom, opacityTo],
-		{ extrapolationRight: 'clamp' }
-	);
-
-	return (
-		<div style={{ opacity: opacity }}>
-			{children}
-		</div>
-	);
-};
-
-const FrameCounter = () => {
-	const frame = useCurrentFrame();
-	return (
-		<div style={{ position: 'absolute', top: 10, left: 10, color: 'white' }}>
-			Frame: {frame}
-		</div>
-	);
-};
-
-const JavaSucksReasons = () => {
-	return (
-		<Grid container spacing={3} justifyContent="center" alignItems="center">
-			<Grid item xs={12} md={6}>
-				<AnimatedScale startFrame={50} endFrame={80}>
-					<Paper className="p-4 bg-gray-800">
-						<BodyText>
-							Verbose syntax makes even simple tasks feel like climbing Mount Everest.
-						</BodyText>
-					</Paper>
-				</AnimatedScale>
-			</Grid>
-			<Grid item xs={12} md={6}>
-				<AnimatedScale startFrame={90} endFrame={120}>
-					<Paper className="p-4 bg-gray-800">
-						<BodyText>
-							XML configuration hell!  Spring, Hibernate... so much boilerplate!
-						</BodyText>
-					</Paper>
-				</AnimatedScale>
-			</Grid>
-			<Grid item xs={12} md={6}>
-				<AnimatedScale startFrame={130} endFrame={160}>
-					<Paper className="p-4 bg-gray-800">
-						<BodyText>
-							"Enterprise Java" often means over-engineered solutions to simple problems.
-						</BodyText>
-					</Paper>
-				</AnimatedScale>
-			</Grid>
-			<Grid item xs={12} md={6}>
-				<AnimatedScale startFrame={170} endFrame={200}>
-					<Paper className="p-4 bg-gray-800">
-						<BodyText>
-							Don't even get started with multi-threading complexities.
-						</BodyText>
-					</Paper>
-				</AnimatedScale>
-			</Grid>
-		</Grid>
-	);
-};
-
-export const MyComposition = () => {
-	const { width, height, durationInFrames } = useVideoConfig();
-	const frame = useCurrentFrame();
-
-	const opacity = interpolate(
-		frame,
-		[0, 30],
-		[0, 1],
-		{ extrapolationRight: 'clamp' }
-	);
-
-	return (
-		<AbsoluteFill style={{ backgroundColor: '#222222', color: 'white', fontFamily: 'sans-serif' }}>
-			{/* <FrameCounter /> */}
-			<Sequence from={0} durationInFrames={30}>
-				<AbsoluteFill style={{ opacity }}>
-					<Title>Why Java is the WORST</Title>
-				</AbsoluteFill>
-			</Sequence>
-
-			<Sequence from={30} durationInFrames={250}>
-				<JavaSucksReasons />
-			</Sequence>
-
-			<Sequence from={280} durationInFrames={30}>
-				<AbsoluteFill style={{ opacity: interpolate(frame, [280, 310], [1, 0], { extrapolationRight: 'clamp' }) }}>
-					<Title>...Okay, maybe it's not *that* bad.</Title>
-				</AbsoluteFill>
-			</Sequence>
-
-		</AbsoluteFill>
-	);
-};
-
-export default MyComposition;
+  return (
+    <AbsoluteFill style={{ backgroundColor: '#F00000', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <AbsoluteFill style={{opacity}}>
+      <div style={{ transform: `scale(${scale}) rotate(${rotate}deg)` }}>
+        <Img src="https://i.kym-cdn.com/photos/images/newsfeed/002/414/779/d9f.jpg" style={{ width: 300, height: 300, objectFit: 'contain' }} />
+      </div>
+      </AbsoluteFill>
+      <Typography variant="h2" style={{ color: 'white', fontWeight: 'bold', fontFamily: 'Arial', textShadow: '2px 2px 4px #000000', position: 'absolute', top: 20, left: 20}}>
+        Why Java Sucks (Brainrot Edition)
+      </Typography>
+    </AbsoluteFill>
+  );
+}
