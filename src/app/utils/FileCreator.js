@@ -4,10 +4,10 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-export async function createFile(content, fileName = "Composition.tsx") {
+export async function createFile(content, fileName = "Main.tsx") {
   const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
   const __dirname = path.dirname(__filename);
-  const outputDir = path.join(__dirname, "../src");
+  const outputDir = path.join(__dirname, "../../remotion", "MyComp");
   const filePath = path.join(outputDir, fileName);
   const fileContent = content || ""; // Default to empty string if no content is provided
 
