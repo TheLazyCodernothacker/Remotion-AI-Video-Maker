@@ -1,4 +1,6 @@
 import { GoogleGenAI } from "@google/genai";
+import dotenv from "dotenv";
+dotenv.config();
 
 let AI = null;
 
@@ -7,7 +9,7 @@ async function getAI() {
     return AI;
   }
   const ai = new GoogleGenAI({
-    apiKey: "AIzaSyDZCVe_hmUvAJl2Ra-Y33Jvfr-oOrMvoZ8",
+    apiKey: process.env.API_KEY || "",
   });
   return ai;
 }

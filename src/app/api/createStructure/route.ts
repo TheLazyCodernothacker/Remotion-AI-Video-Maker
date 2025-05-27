@@ -1,14 +1,44 @@
-export async function GET(request: Request) {
-  const res = await fetch("./api/askAI", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      content:
-        'Make one slide intro for a funny video on why java sucks lmao. make it brainrot. use export default function MyComposition(). imports can ONLY be from remotion packages such as "remotion" OR "react" OR material ui. Be careful for <Composition> mounted inside another composition error. Also you can use tailwind classnames and make sure to specify the bg colors. Answer with the code as text ONLY. beware of the error outputRange must contain only numbers and check for it also check for the error <Composition> mounted inside another composition. watch out for this error too: TypeError(0 , remotion__WEBPACK_IMPORTED_MODULE_1__.useRemotionRoot) is not a function watch out for this error too: <Composition> mounted inside another composition DO NOT USE <Compsotion>. Possible imports frmo remotion are AbsoluteFill, AnimatedImage, Artifact, Audio, Composition, Config, Easing, Experimental, Folder, FolderContext, Freeze, IFrame, Img, Internals, Loop, OffthreadVideo, Sequence, Series, Still, VERSION, Video, cancelRender, continueRender, delayRender, getInputProps, getRemotionEnvironment, getStaticFiles, interpolate, interpolateColors, measureSpring, prefetch, random, registerRoot, spring, staticFile, useBufferState, useCurrentFrame, useCurrentScale, useVideoConfig, watchStaticFile',
-    }),
-  });
-  const data = await res.json();
-  return new Response(data.text);
+import getAi from "../../utils/ai";
+
+export async function POST(request: Request) {
+  const AI = await getAi();
+  const { text } = await request.json();
+  try {
+    let prompt =
+      "You are creating a video structure for a video. The output should be one line with this format: Intro & 300 & desc | Ending & 240 & desc. The first part is the name of the section and the second part is the duration in frames. The third part is a thorough but open description of that part of the video through the limitations of remotionjs. The video will not use other videos and be more text and animation based. The has a frame rate of 30 fps.  Do not include any other text or explanations, just return the structure in the specified format. Don't forget the video has more than two sections most likely. The video is about: " +
+      text;
+    const data = await AI.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: prompt,
+    });
+    let output = [];
+    data.text.split("|").forEach((section: string) => {
+      const [name, duration, description] = section
+        .split("&")
+        .map((s) => s.trim());
+      output.push({
+        name,
+        duration: parseInt(duration, 10),
+        description,
+      });
+    });
+
+    let MainContent = `import {Sequence} from 'remotion';\nexport const Main: React.FC = () => {\n`;
+    MainContent += `  return (\n<>\n`;
+    let sum = 0;
+    output.forEach((section, index) => {
+      MainContent += `<Sequence from={${sum}} durationInFrames={${section.duration}}>\n`;
+      MainContent += `  <${section.name} />\n`;
+      MainContent += `</Sequence>\n`;
+      sum += section.duration;
+    });
+    MainContent += `</>\n`;
+    MainContent += `);\n};\n`;
+    console.log("Generated Main.tsx content:", MainContent);
+
+    return new Response(JSON.stringify({ output }));
+  } catch (error) {
+    console.error("Error generating content:", error);
+    return new Response("Error generating content", { status: 500 });
+  }
 }
