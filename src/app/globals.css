@@ -18,3 +18,10 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.special {
+  background: linear-gradient(to right, #00aeff, #ff00a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* background: linear-gradient(to right, #00aeff, #ff00a8); */
+}
