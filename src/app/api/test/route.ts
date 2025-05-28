@@ -1,5 +1,5 @@
 import getAi from "../../utils/ai";
-import { createFile } from "../../utils/FileCreator";
+import { createFile } from "../../utils/FileSystem";
 
 export async function GET(request: Request) {
   // For example, fetch data from your DB here
