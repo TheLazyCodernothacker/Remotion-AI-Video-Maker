@@ -4,7 +4,9 @@ export const Outro: React.FC = () => {
   return (
     <div>
       <h1>Outro</h1>
-      <p>Summarize the key arguments and provide a concluding statement, encouraging viewers to explore more original and creative content.</p>
+      <p>Recap of the steps, encouragement for viewers to practice, and call to action to like, subscribe, and leave questions in the comments.</p>
     </div>
   );
 };
+
+export const Outro_Duration = 240;
