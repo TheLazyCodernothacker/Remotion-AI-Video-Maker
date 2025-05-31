@@ -43,14 +43,16 @@ export async function reset() {
   if (fs.existsSync(outputDir)) {
     fs.readdirSync(outputDir).forEach((file) => {
       const filePath = path.join(outputDir, file);
+      // Check if it's Main.tx
+      if (file === "Main.tsx") {
+        // If it's Main.tsx, we don't delete it
+        return;
+      }
       fs.unlinkSync(filePath);
     });
     console.log("All files in MyComp directory have been removed.");
-    let defaultContent = `export const Main = () => {
-      return <div>Hello, World!</div>;
-      };
-      export const duration = 30; // Duration in frames`;
-    createFile(defaultContent, "Main.tsx");
+
+    createFile("let files = [];export default files;", "FILEHANDLER.tsx");
   } else {
     console.log("MyComp directory does not exist.");
     createFile(defaultContent, "Main.tsx");

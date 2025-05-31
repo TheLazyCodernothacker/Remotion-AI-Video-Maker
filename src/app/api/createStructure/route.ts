@@ -24,46 +24,20 @@ export async function POST(request: Request) {
       });
     });
 
-    let MainContent = `import {Sequence} from 'remotion';\nexport const Main: React.FC = () => {\n`;
-    MainContent += `  return (\n<>\n`;
     let imports = `import React from 'react';\n`;
     output.forEach((section, index) => {
       section.name = section.name.trim().replace(/\s+/g, "");
       imports += `import { ${section.name}, ${section.name}_Duration } from './${section.name}';\n`;
     });
     let FileHandlerCode = imports;
-    MainContent += "<Sequences />\n";
-    MainContent += `</>\n`;
-    MainContent += `);\n};\n`;
-    MainContent += `let a = 0;
-    files.forEach((file) => {
-      a += file.duration;
-    });
-    export const duration = a;\n`;
+
     let declaration = `let files = [${output.map((section) => `{name: ${section.name}, duration: ${section.name}_Duration}`).join(", ")}];\n`;
     FileHandlerCode += declaration;
     FileHandlerCode += "export default files;\n";
-    let sequenceCode = `function Sequences(){
-      let sum = 0;
-      return files.map((file) => {
-        const Component = file.name;
-        
-        return (
-          <Sequence key={sum} from={(sum += file.duration) - file.duration} durationInFrames={file.duration}>
-            <Component />
-          </Sequence>
-        );
-      });
-    }
-    \n`;
-    MainContent = sequenceCode + MainContent;
-    MainContent = `import React from "react"\n` + MainContent;
-    MainContent = `import files from "./FILEHANDLER";\n` + MainContent;
 
     await reset();
     await createFile(FileHandlerCode, "FILEHANDLER.tsx");
 
-    await createFile(MainContent, "Main.tsx");
     console.log("File created successfully: Main.tsx");
     output.forEach((section) => {
       let fileContent = `import React from 'react';\n\nexport const ${section.name}: React.FC = () => {\n`;

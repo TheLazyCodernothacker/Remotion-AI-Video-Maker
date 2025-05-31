@@ -1,10 +1,9 @@
-import React from 'react';
-import { Intro, Intro_Duration } from './Intro';
-import { Explanation, Explanation_Duration } from './Explanation';
-import { Examples, Examples_Duration } from './Examples';
-import { Common_Mistakes, Common_Mistakes_Duration } from './Common_Mistakes';
-import { Interactive_Quiz, Interactive_Quiz_Duration } from './Interactive_Quiz';
-import { Solution, Solution_Duration } from './Solution';
-import { Outro, Outro_Duration } from './Outro';
-let files = [{name: Intro, duration: Intro_Duration}, {name: Explanation, duration: Explanation_Duration}, {name: Examples, duration: Examples_Duration}, {name: Common_Mistakes, duration: Common_Mistakes_Duration}, {name: Interactive_Quiz, duration: Interactive_Quiz_Duration}, {name: Solution, duration: Solution_Duration}, {name: Outro, duration: Outro_Duration}];
+import { Intro, Intro_Duration } from "./Intro";
+
+let files = [
+  {
+    name: Intro,
+    duration: Intro_Duration,
+  },
+];
 export default files;

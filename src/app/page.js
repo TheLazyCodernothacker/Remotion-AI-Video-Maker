@@ -111,7 +111,7 @@ export default function Home() {
       alert("Section not found.");
       return;
     }
-    
+
     setIsLoading(true);
     setLoadingMessage("Updating section...");
     setSubText("Hang tight, we're refining your video...");
@@ -166,6 +166,7 @@ export default function Home() {
             controls
             loop
             className="scale-80 rounded-xl border border-gray-300 shadow-md transition-all duration-300 hover:shadow-[0_4px_20px_rgba(59,130,246,0.4)]"
+            autoPlay
           />
         </div>
 
@@ -186,7 +187,6 @@ export default function Home() {
         >
           Generate Outline
         </button>
-
         {files.length > 0 && (
           <div className="w-full space-y-12 pt-8">
             {files.map((file, index) => (
