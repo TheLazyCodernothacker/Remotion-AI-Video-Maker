@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     FileHandlerCode += declaration;
     FileHandlerCode += "export default files;\n";
 
-    await reset();
+    let a = await reset();
     await createFile(FileHandlerCode, "FILEHANDLER.tsx");
 
     console.log("File created successfully: Main.tsx");

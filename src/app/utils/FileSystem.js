@@ -20,7 +20,7 @@ export async function createFile(
     fs.mkdirSync(outputDir, { recursive: true });
   }
   // Write the file
-  fs.writeFile(filePath, fileContent, (err) => {
+  fs.writeFileSync(filePath, fileContent, (err) => {
     if (err) {
       console.error("Error writing file:", err);
     } else {
@@ -65,7 +65,8 @@ export default files;
 `,
       "FILEHANDLER.tsx",
     );
-    await createFile(`import { interpolate, useCurrentFrame } from "remotion";
+    await createFile(
+      `import { interpolate, useCurrentFrame } from "remotion";
     
     export const Intro: React.FC = () => {
       const frame = useCurrentFrame();
@@ -113,10 +114,12 @@ export default files;
     };
     
     export const Intro_Duration = 150; // 5 seconds at 30fps
-    `, "Intro.tsx")
+    `,
+      "Intro.tsx",
+    );
   } else {
     console.log("MyComp directory does not exist.");
-    createFile(defaultContent, "Main.tsx");
+    await createFile(defaultContent, "Main.tsx");
   }
 }
 // This code creates a directory called 'output/src' if it doesn't exist and writes an empty file named 'Composition.tsx' in that directory.
