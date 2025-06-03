@@ -100,7 +100,7 @@ export default function Home() {
     }
   }
 
-  async function editSection(name) {
+  async function editSection(name, edited) {
     const input = inputState[name]?.input;
     if (!input) {
       alert("Please enter a description for this section.");
@@ -122,7 +122,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ section: name, desc: input }),
+        body: JSON.stringify({ section: name, desc: input, edited: edited }),
       });
 
       if (!response.ok) throw new Error("Failed to edit section");
@@ -204,7 +204,11 @@ export default function Home() {
                 <textarea
                   className="w-full max-w-lg p-2 text-gray-900 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
-                  placeholder={`Edit ${file.name.name} section... (or give suggestions)`}
+                  placeholder={
+                    file.edited == false
+                      ? `What should the ${file.name.name} section be?`
+                      : "Give a suggestion for this section..."
+                  }
                   value={inputState[file.name.name]?.input || ""}
                   onChange={(e) =>
                     setInputState((prev) => ({
@@ -216,7 +220,7 @@ export default function Home() {
                   }
                 />
                 <button
-                  onClick={() => editSection(file.name.name)}
+                  onClick={() => editSection(file.name.name, file.edited)}
                   className="w-full max-w-lg mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   Confirm

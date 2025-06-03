@@ -1,49 +1,57 @@
-import { interpolate, useCurrentFrame } from "remotion";
-    
-    export const Intro: React.FC = () => {
-      const frame = useCurrentFrame();
-    
-      // Animate text scale and opacity
-      const opacity = interpolate(frame, [0, 20], [0, 1], {
-        extrapolateRight: "clamp",
-      });
-      const scale = interpolate(frame, [0, 20], [0.95, 1], {
-        extrapolateRight: "clamp",
-      });
-    
-      // Animate background position for gradient movement
-      const bgShift = interpolate(frame, [0, 150], [0, 100]);
-    
-      return (
-        <div
-          className="w-full h-full flex flex-col justify-center items-center"
-          style={{
-            backgroundImage: "linear-gradient(135deg, #a1c4fd, #c2e9fb)",
-            backgroundSize: "200% 200%",
-            backgroundPosition: `${bgShift}% ${bgShift}%`,
-          }}
-        >
-          <h1
-            className="text-6xl font-bold text-gray-800"
-            style={{
-              opacity,
-              transform: `scale(${scale})`,
-            }}
-          >
-            Welcome to
-          </h1>
-          <h2
-            className="text-4xl mt-4 bg-gradient-to-r from-indigo-400 to-purple-600 bg-clip-text text-transparent font-semibold"
-            style={{
-              opacity,
-              transform: `scale(${scale})`,
-            }}
-          >
-            AI Video Maker 🎬✨
-          </h2>
+// AIWASHERE
+import React from 'react';
+import {
+  AbsoluteFill,
+  useCurrentFrame,
+  useVideoConfig,
+  interpolate,
+  Easing,
+} from 'remotion';
+
+export const Intro: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps, height, width } = useVideoConfig();
+  const durationInFrames = 3 * fps; // 3 seconds animation
+  const progress = Math.min(1, frame / durationInFrames);
+
+  const scale = interpolate(progress, [0, 1], [0.5, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  const opacity = interpolate(progress, [0, 0.5, 1], [0, 1, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  const translateY = interpolate(progress, [0, 1], [height / 4, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+    easing: Easing.easeOut,
+  });
+
+  const bgColor = `rgba(59, 130, 246, ${opacity})`; // Indigo color
+  const textColor = `rgba(255, 255, 255, ${opacity})`;
+
+  return (
+    <AbsoluteFill style={{backgroundColor:bgColor}}>
+      <AbsoluteFill style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+        transform: `scale(${scale}) translateY(${translateY}px)`,
+        opacity,
+      }}>
+        <div className="text-center">
+          <h1 className="text-6xl font-bold" style={{ color: textColor }}>Welcome to MyComp</h1>
+          <p className="text-2xl mt-4" style={{ color: textColor }}>
+            A sleek and modern Remotion intro.
+          </p>
         </div>
-      );
-    };
-    
-    export const Intro_Duration = 150; // 5 seconds at 30fps
-    
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+export const Intro_Duration = 90; // Duration in frames 30fps, change this to the duration you want for the section
+export const Intro_Edited = true; // Set to true if the section is edited

@@ -49,6 +49,7 @@
     "lint": "next lint",
     "remotion": "remotion studio",
     "render": "remotion render",
-    "deploy": "node deploy.mjs"
+    "deploy": "node deploy.mjs",
+    "reset": "node src/app/utils/reset.js"
   }
 }

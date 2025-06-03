@@ -122,6 +122,17 @@ export default files;
     await createFile(defaultContent, "Main.tsx");
   }
 }
+
+export async function readFile(fileName) {
+  const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+  const __dirname = path.dirname(__filename);
+  const inputDir = path.join(__dirname, "../../remotion/MyComp");
+  const filePath = path.join(inputDir, fileName);
+  if (fs.existsSync(filePath)) {
+    const content = fs.readFileSync(filePath, "utf8");
+    return content;
+  }
+}
 // This code creates a directory called 'output/src' if it doesn't exist and writes an empty file named 'Composition.tsx' in that directory.
 // The file is created in the same directory as this script.
 // You can modify the fileContent variable to add content to the file.

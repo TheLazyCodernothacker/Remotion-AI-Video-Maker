@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   const { text } = await request.json();
   try {
     let prompt =
-      "You are creating a video structure for a video. The output should be one line with this format: Intro & 300 & desc | Ending & 240 & desc. The first part is the name of the section snake case capetalized first letter each and the second part is the duration in frames. The third part is a thorough but open description of that part of the video through the limitations of remotionjs. The video will not use other videos and be more text and animation based. The has a frame rate of 30 fps.  Do not include any other text or explanations, just return the structure in the specified format. Don't forget the video has more than two sections most likely. The video is about: " +
+      "You are creating a video structure for a video. The output should be one line with this format: Intro & 300 & desc | Ending & 240 & desc. The first part is the name of the section snake case capetalized first letter each and the second part is the duration in frames. The third part is a thorough but open description of that part of the video through the limitations of remotionjs. The video will not use other videos and be more text and animation based. The description for each section should be specific so it can be independent from others. Don't do something like \"Introducing the main topic\" instead specify what the main topic would be. The has a frame rate of 30 fps.  Do not include any other text or explanations, just return the structure in the specified format. Don't forget the video has more than two sections most likely. Make sure each section of the video doesn't end with thanks for watching unless it is the conclusion. Make sure the timings are all correct, each text being up for enough time but not too long, and showcasing every element. Make sure the information of the video is also factually accurate " +
       text;
     const data = await AI.models.generateContent({
       model: "gemini-2.0-flash",
@@ -27,11 +27,11 @@ export async function POST(request: Request) {
     let imports = `import React from 'react';\n`;
     output.forEach((section, index) => {
       section.name = section.name.trim().replace(/\s+/g, "");
-      imports += `import { ${section.name}, ${section.name}_Duration } from './${section.name}';\n`;
+      imports += `import { ${section.name}, ${section.name}_Duration, ${section.name}_Edited } from './${section.name}';\n`;
     });
     let FileHandlerCode = imports;
 
-    let declaration = `let files = [${output.map((section) => `{name: ${section.name}, duration: ${section.name}_Duration}`).join(", ")}];\n`;
+    let declaration = `let files = [${output.map((section) => `{name: ${section.name}, duration: ${section.name}_Duration, edited: ${section.name}_Edited }`).join(", ")}];\n`;
     FileHandlerCode += declaration;
     FileHandlerCode += "export default files;\n";
 
@@ -43,6 +43,7 @@ export async function POST(request: Request) {
       let fileContent = `import React from 'react';\n\nexport const ${section.name}: React.FC = () => {\n`;
       fileContent += `  return (\n    <div>\n      <h1>${section.name}</h1>\n      <p>${section.description}</p>\n    </div>\n  );\n};\n`;
       fileContent += `\nexport const ${section.name}_Duration = ${section.duration};\n`;
+      fileContent += `export const ${section.name}_Edited = false;`;
       createFile(fileContent, `${section.name}.tsx`);
       console.log(`File created successfully: ${section.name}.tsx`);
     });
