@@ -1,9 +1,10 @@
 import React from 'react';
 import { Intro, Intro_Duration, Intro_Edited } from './Intro';
-import { Goalscoring_Prowess, Goalscoring_Prowess_Duration, Goalscoring_Prowess_Edited } from './Goalscoring_Prowess';
-import { Adaptability_And_Longevity, Adaptability_And_Longevity_Duration, Adaptability_And_Longevity_Edited } from './Adaptability_And_Longevity';
-import { Mental_Strength_And_Dedication, Mental_Strength_And_Dedication_Duration, Mental_Strength_And_Dedication_Edited } from './Mental_Strength_And_Dedication';
-import { Titles_And_Achievements, Titles_And_Achievements_Duration, Titles_And_Achievements_Edited } from './Titles_And_Achievements';
+import { Limits_Introduction, Limits_Introduction_Duration, Limits_Introduction_Edited } from './Limits_Introduction';
+import { Limits_Analytic_Evaluation, Limits_Analytic_Evaluation_Duration, Limits_Analytic_Evaluation_Edited } from './Limits_Analytic_Evaluation';
+import { Limits_Involving_Infinity, Limits_Involving_Infinity_Duration, Limits_Involving_Infinity_Edited } from './Limits_Involving_Infinity';
+import { Continuity_Definition, Continuity_Definition_Duration, Continuity_Definition_Edited } from './Continuity_Definition';
+import { Intermediate_Value_Theorem, Intermediate_Value_Theorem_Duration, Intermediate_Value_Theorem_Edited } from './Intermediate_Value_Theorem';
 import { Conclusion, Conclusion_Duration, Conclusion_Edited } from './Conclusion';
-let files = [{name: Intro, duration: Intro_Duration, edited: Intro_Edited }, {name: Goalscoring_Prowess, duration: Goalscoring_Prowess_Duration, edited: Goalscoring_Prowess_Edited }, {name: Adaptability_And_Longevity, duration: Adaptability_And_Longevity_Duration, edited: Adaptability_And_Longevity_Edited }, {name: Mental_Strength_And_Dedication, duration: Mental_Strength_And_Dedication_Duration, edited: Mental_Strength_And_Dedication_Edited }, {name: Titles_And_Achievements, duration: Titles_And_Achievements_Duration, edited: Titles_And_Achievements_Edited }, {name: Conclusion, duration: Conclusion_Duration, edited: Conclusion_Edited }];
+let files = [{name: Intro, duration: Intro_Duration, edited: Intro_Edited }, {name: Limits_Introduction, duration: Limits_Introduction_Duration, edited: Limits_Introduction_Edited }, {name: Limits_Analytic_Evaluation, duration: Limits_Analytic_Evaluation_Duration, edited: Limits_Analytic_Evaluation_Edited }, {name: Limits_Involving_Infinity, duration: Limits_Involving_Infinity_Duration, edited: Limits_Involving_Infinity_Edited }, {name: Continuity_Definition, duration: Continuity_Definition_Duration, edited: Continuity_Definition_Edited }, {name: Intermediate_Value_Theorem, duration: Intermediate_Value_Theorem_Duration, edited: Intermediate_Value_Theorem_Edited }, {name: Conclusion, duration: Conclusion_Duration, edited: Conclusion_Edited }];
 export default files;
