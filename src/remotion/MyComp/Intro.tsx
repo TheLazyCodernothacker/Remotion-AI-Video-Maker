@@ -1,162 +1,187 @@
 // AIWASHERE
-// This Intro component provides a modern, sleek, and colorful introduction for the "AP Calculus AB - Unit 1: Limits" video.
-// It features animated text elements appearing sequentially with smooth transitions and custom easing.
-// The background has subtle animating light elements that add color and dynamism without using images.
-// The primary background color subtly shifts, achieved by interpolating numerical RGB values.
-// Text elements scale, fade, and translate into view, making the information easy to read and visually engaging.
-// All animations rely on Remotion's useCurrentFrame, interpolate, and Easing.bezier for precise control.
-// No images or external assets are used, relying solely on CSS (Tailwind) and Remotion's animation capabilities.
+// This Intro component creates a dynamic and modern title card animation for the video
+// 'Introduction to CSS Grid: Mastering Modern Layouts'.
+// It features a sleek dark background with subtle animating background shapes,
+// and uses a fade-in and scale-up effect for the title and subtitle texts.
+// All animations are carefully timed using Remotion's `useCurrentFrame` and `interpolate`
+// with `Easing.bezier` for smooth transitions.
+// The design prioritizes readability, elegance, and a professional look without using any images.
 
 import React from 'react';
-import { useCurrentFrame, interpolate, Easing } from 'remotion';
+import { useCurrentFrame, useVideoConfig, interpolate, Easing } from 'remotion';
 
 export const Intro: React.FC = () => {
   const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
 
-  // Animation timings (in frames)
-  const titleFadeInStart = 10;
-  const titleFadeInEnd = 40;
-  const titleMoveUpStart = 40;
-  const titleMoveUpEnd = 80;
+  // Animation timings for text
+  const titleStart = 0;
+  const titleEnd = 40; // Title fully visible by frame 40 (approx 1.3 seconds)
 
-  const lineFadeInStart = 60;
-  const lineFadeInEnd = 90;
-  const lineScaleXStart = 70;
-  const lineScaleXEnd = 120; // Longer duration for the line to fully scale
+  const subtitleStart = 20; // Subtitle starts animating after title begins
+  const subtitleEnd = 60; // Subtitle fully visible by frame 60 (approx 2 seconds)
 
-  const subtitleFadeInStart = 80;
-  const subtitleFadeInEnd = 110;
-  const subtitleMoveUpStart = 110;
-  const subtitleMoveUpEnd = 150;
+  // Animation timings for background shapes
+  const bgShapeStart = 0;
+  const bgShapeFadeInEnd = 80; // Shapes fade in
+  const bgShapeScaleEnd = durationInFrames; // Shapes continuously scale and rotate
 
-  // Opacity for "AP Calculus AB"
-  const opacityTitle = interpolate(
+  // Interpolation for Title: Opacity, Scale, and slight vertical translation
+  const titleOpacity = interpolate(
     frame,
-    [titleFadeInStart, titleFadeInEnd],
+    [titleStart, titleEnd],
     [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.42, 0, 0.58, 1) } // Ease-in-out
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.8, 0.22, 0.96, 0.65), // Custom smooth easing
+    }
   );
 
-  // Vertical movement for "AP Calculus AB" (starts lower, moves up)
-  const translateYTitle = interpolate(
+  const titleScale = interpolate(
     frame,
-    [titleMoveUpStart, titleMoveUpEnd],
-    [50, 0], // Starts 50px down, moves to 0px
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.68, -0.55, 0.265, 1.55) } // Bouncy effect
+    [titleStart, titleEnd],
+    [0.8, 1], // Starts smaller, scales up
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.8, 0.22, 0.96, 0.65),
+    }
   );
 
-  // Opacity for the dividing line
-  const opacityLine = interpolate(
+  const titleTranslateY = interpolate(
     frame,
-    [lineFadeInStart, lineFadeInEnd],
+    [titleStart, titleEnd],
+    [30, 0], // Starts 30px below final position, moves up
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.8, 0.22, 0.96, 0.65),
+    }
+  );
+
+  // Interpolation for Subtitle: Opacity and Scale
+  const subtitleOpacity = interpolate(
+    frame,
+    [subtitleStart, subtitleEnd],
     [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.42, 0, 0.58, 1) }
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.8, 0.22, 0.96, 0.65),
+    }
   );
 
-  // Horizontal scale for the dividing line (grows from center)
-  const scaleXLine = interpolate(
+  const subtitleScale = interpolate(
     frame,
-    [lineScaleXStart, lineScaleXEnd],
-    [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.68, -0.55, 0.265, 1.55) }
+    [subtitleStart, subtitleEnd],
+    [0.9, 1], // Starts slightly smaller, scales up
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.8, 0.22, 0.96, 0.65),
+    }
   );
 
-  // Opacity for "Unit 1: Limits"
-  const opacitySubtitle = interpolate(
+  // Interpolation for Background Shapes: Opacity, Scale, and Rotation
+  const bgShapeOpacity = interpolate(
     frame,
-    [subtitleFadeInStart, subtitleFadeInEnd],
-    [0, 1],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.42, 0, 0.58, 1) }
+    [bgShapeStart, bgShapeFadeInEnd],
+    [0, 0.3], // Fades in to a subtle opacity
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.bezier(0.8, 0.22, 0.96, 0.65),
+    }
   );
 
-  // Vertical movement for "Unit 1: Limits" (starts lower, moves up)
-  const translateYSubtitle = interpolate(
+  const bgShapeScale = interpolate(
     frame,
-    [subtitleMoveUpStart, subtitleMoveUpEnd],
-    [50, 0],
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.68, -0.55, 0.265, 1.55) }
+    [bgShapeStart, bgShapeScaleEnd],
+    [0.5, 1.2], // Continuously scales larger throughout the video
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.linear, // Smooth, consistent growth
+    }
   );
 
-  // Subtle background color interpolation (animating RGB values)
-  const bgRed = interpolate(frame, [0, Intro_Duration], [10, 15], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const bgGreen = interpolate(frame, [0, Intro_Duration], [10, 20], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const bgBlue = interpolate(frame, [0, Intro_Duration], [25, 35], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-
-  // Subtle pulse/scale effect on the entire container
-  const containerScale = interpolate(
+  const bgShapeRotate = interpolate(
     frame,
-    [0, Intro_Duration / 2, Intro_Duration],
-    [1, 1.005, 1], // Subtle scale up and back down
-    { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.42, 0, 0.58, 1) }
+    [bgShapeStart, durationInFrames],
+    [0, 360], // Rotates a full circle throughout the duration
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+      easing: Easing.linear, // Consistent rotation speed
+    }
   );
 
   return (
+    // Main container with a sleek, dark gradient background
     <div
-      className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden"
+      className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden font-sans"
       style={{
-        backgroundColor: `rgb(${bgRed}, ${bgGreen}, ${bgBlue})`, // Dark blue-gray background
-        transform: `scale(${containerScale})`,
+        background: 'linear-gradient(135deg, #0A0A2A 0%, #1A0F3A 50%, #0A0A2A 100%)', // Deep indigo/purple gradient
       }}
     >
-      {/* Dynamic colorful abstract shapes - No images, pure CSS shapes with blur and blend modes */}
+      {/* Subtle animating background shape 1 (Purple glow) */}
       <div
-        className="absolute w-72 h-72 bg-blue-500 rounded-full mix-blend-lighten opacity-20 blur-3xl"
+        className="absolute rounded-full"
         style={{
-          top: `${interpolate(frame, [0, Intro_Duration], [20, 80], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}%`,
-          left: `${interpolate(frame, [0, Intro_Duration], [10, 70], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}%`,
-          transform: `translate(-50%, -50%) scale(${interpolate(frame, [0, Intro_Duration], [0.8, 1.2], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })})`,
+          width: '800px',
+          height: '800px',
+          background: 'radial-gradient(circle, rgba(100,50,200,0.4) 0%, rgba(100,50,200,0) 70%)',
+          opacity: bgShapeOpacity,
+          transform: `translate(calc(-50% + ${bgShapeScale * 10}px), calc(-50% - ${bgShapeScale * 20}px)) scale(${bgShapeScale}) rotate(${bgShapeRotate}deg)`,
+          top: '20%',
+          left: '10%',
+          zIndex: 0,
         }}
       />
+      {/* Subtle animating background shape 2 (Teal glow) */}
       <div
-        className="absolute w-96 h-96 bg-purple-500 rounded-full mix-blend-lighten opacity-20 blur-3xl"
+        className="absolute rounded-full"
         style={{
-          bottom: `${interpolate(frame, [0, Intro_Duration], [20, 70], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}%`,
-          right: `${interpolate(frame, [0, Intro_Duration], [10, 60], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}%`,
-          transform: `translate(50%, 50%) scale(${interpolate(frame, [0, Intro_Duration], [1.2, 0.8], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })})`,
-        }}
-      />
-      <div
-        className="absolute w-80 h-80 bg-pink-500 rounded-full mix-blend-lighten opacity-20 blur-3xl"
-        style={{
-          top: `${interpolate(frame, [0, Intro_Duration], [80, 20], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}%`,
-          left: `${interpolate(frame, [0, Intro_Duration], [80, 30], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}%`,
-          transform: `translate(-50%, -50%) scale(${interpolate(frame, [0, Intro_Duration], [0.9, 1.1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })})`,
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(circle, rgba(50,200,150,0.3) 0%, rgba(50,200,150,0) 70%)',
+          opacity: bgShapeOpacity,
+          transform: `translate(calc(-50% - ${bgShapeScale * 15}px), calc(-50% + ${bgShapeScale * 10}px)) scale(${bgShapeScale * 0.8}) rotate(-${bgShapeRotate * 0.5}deg)`,
+          bottom: '10%',
+          right: '10%',
+          zIndex: 0,
         }}
       />
 
-      {/* Main content layer, ensures text is above abstract shapes */}
-      <div className="z-10 text-center">
+      {/* Content wrapper for title and subtitle, ensuring they are above background elements */}
+      <div className="relative z-10 text-center p-4 max-w-4xl mx-auto">
+        {/* Main Title */}
         <h1
-          className="text-6xl font-extrabold tracking-tight text-white mb-4 drop-shadow-lg"
+          className="text-6xl md:text-8xl font-extrabold text-white leading-tight mb-4 tracking-tight"
           style={{
-            opacity: opacityTitle,
-            transform: `translateY(${translateYTitle}px)`,
+            opacity: titleOpacity,
+            transform: `scale(${titleScale}) translateY(${titleTranslateY}px)`,
+            textShadow: '0 0 15px rgba(255,255,255,0.2), 0 0 30px rgba(100,50,200,0.3)', // Subtle text glow
           }}
         >
-          AP Calculus AB
+          Introduction to CSS Grid
         </h1>
-
-        <div
-          className="w-2/3 h-1 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 mx-auto my-6 rounded-full"
-          style={{
-            opacity: opacityLine,
-            transform: `scaleX(${scaleXLine})`,
-          }}
-        ></div>
-
+        {/* Subtitle */}
         <p
-          className="text-4xl font-semibold text-gray-200"
+          className="text-2xl md:text-4xl text-teal-300 font-light tracking-wide px-4"
           style={{
-            opacity: opacitySubtitle,
-            transform: `translateY(${translateYSubtitle}px)`,
+            opacity: subtitleOpacity,
+            transform: `scale(${subtitleScale})`,
+            textShadow: '0 0 10px rgba(50,200,150,0.2)', // Subtle text glow
           }}
         >
-          Unit 1: Limits
+          Mastering Modern Layouts
         </p>
       </div>
     </div>
   );
 };
 
-export const Intro_Duration = 240; // Duration in frames (8 seconds at 30fps)
-export const Intro_Edited = true; // Set to true if the section is edited
+export const Intro_Duration = 360; // Duration in frames (30fps implies 12 seconds)
+export const Intro_Edited = true; // Set to true to indicate this section has been customized

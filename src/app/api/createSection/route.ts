@@ -29,7 +29,6 @@ export const ${section}_Duration = 360; // Duration in frames 30fps, change this
 export const ${section}_Edited = true; // Set to true if the section is edited
       ` +
     "Make sure to leave a comment AIWASHERE at the top of the file. Leave a comment for a thorough description of the section. ";
-  console.log(content)
   if (edited == true) {
     readFile(section + ".tsx").then((fileContent) => {
       // console.log(fileContent);
@@ -38,6 +37,11 @@ export const ${section}_Edited = true; // Set to true if the section is edited
         fileContent;
     });
   }
+  try {
+    await createFile(content, section + ".txt");
+  } catch (error) {
+    console.error("Error creating file:", error);
+  }
   const response = await AI.models.generateContent({
     model: "gemini-2.5-flash-preview-05-20",
     contents: content,
@@ -45,6 +49,7 @@ export const ${section}_Edited = true; // Set to true if the section is edited
   let fileContent = response.text.split("```")[1].split("\n");
   fileContent.shift();
   fileContent = fileContent.join("\n");
+ 
   try {
     await createFile(fileContent, section + ".tsx");
   } catch (error) {

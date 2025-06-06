@@ -1,10 +1,11 @@
 import React from 'react';
 import { Intro, Intro_Duration, Intro_Edited } from './Intro';
-import { Limits_Introduction, Limits_Introduction_Duration, Limits_Introduction_Edited } from './Limits_Introduction';
-import { Limits_Analytic_Evaluation, Limits_Analytic_Evaluation_Duration, Limits_Analytic_Evaluation_Edited } from './Limits_Analytic_Evaluation';
-import { Limits_Involving_Infinity, Limits_Involving_Infinity_Duration, Limits_Involving_Infinity_Edited } from './Limits_Involving_Infinity';
-import { Continuity_Definition, Continuity_Definition_Duration, Continuity_Definition_Edited } from './Continuity_Definition';
-import { Intermediate_Value_Theorem, Intermediate_Value_Theorem_Duration, Intermediate_Value_Theorem_Edited } from './Intermediate_Value_Theorem';
-import { Conclusion, Conclusion_Duration, Conclusion_Edited } from './Conclusion';
-let files = [{name: Intro, duration: Intro_Duration, edited: Intro_Edited }, {name: Limits_Introduction, duration: Limits_Introduction_Duration, edited: Limits_Introduction_Edited }, {name: Limits_Analytic_Evaluation, duration: Limits_Analytic_Evaluation_Duration, edited: Limits_Analytic_Evaluation_Edited }, {name: Limits_Involving_Infinity, duration: Limits_Involving_Infinity_Duration, edited: Limits_Involving_Infinity_Edited }, {name: Continuity_Definition, duration: Continuity_Definition_Duration, edited: Continuity_Definition_Edited }, {name: Intermediate_Value_Theorem, duration: Intermediate_Value_Theorem_Duration, edited: Intermediate_Value_Theorem_Edited }, {name: Conclusion, duration: Conclusion_Duration, edited: Conclusion_Edited }];
+import { What_Is_CSS_Grid, What_Is_CSS_Grid_Duration, What_Is_CSS_Grid_Edited } from './What_Is_CSS_Grid';
+import { Basic_Concepts, Basic_Concepts_Duration, Basic_Concepts_Edited } from './Basic_Concepts';
+import { Defining_Rows_And_Columns, Defining_Rows_And_Columns_Duration, Defining_Rows_And_Columns_Edited } from './Defining_Rows_And_Columns';
+import { Placing_Items, Placing_Items_Duration, Placing_Items_Edited } from './Placing_Items';
+import { Responsive_Design, Responsive_Design_Duration, Responsive_Design_Edited } from './Responsive_Design';
+import { Summary, Summary_Duration, Summary_Edited } from './Summary';
+import { Outro, Outro_Duration, Outro_Edited } from './Outro';
+let files = [{name: Intro, duration: Intro_Duration, edited: Intro_Edited }, {name: What_Is_CSS_Grid, duration: What_Is_CSS_Grid_Duration, edited: What_Is_CSS_Grid_Edited }, {name: Basic_Concepts, duration: Basic_Concepts_Duration, edited: Basic_Concepts_Edited }, {name: Defining_Rows_And_Columns, duration: Defining_Rows_And_Columns_Duration, edited: Defining_Rows_And_Columns_Edited }, {name: Placing_Items, duration: Placing_Items_Duration, edited: Placing_Items_Edited }, {name: Responsive_Design, duration: Responsive_Design_Duration, edited: Responsive_Design_Edited }, {name: Summary, duration: Summary_Duration, edited: Summary_Edited }, {name: Outro, duration: Outro_Duration, edited: Outro_Edited }];
 export default files;
