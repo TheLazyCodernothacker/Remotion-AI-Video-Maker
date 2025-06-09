@@ -1,10 +1,10 @@
 import React from 'react';
-import { The_Founding_Vision, The_Founding_Vision_Duration, The_Founding_Vision_Edited } from './The_Founding_Vision';
-import { The_MS_DOS_Revolution, The_MS_DOS_Revolution_Duration, The_MS_DOS_Revolution_Edited } from './The_MS_DOS_Revolution';
-import { Windows_Dominance, Windows_Dominance_Duration, Windows_Dominance_Edited } from './Windows_Dominance';
-import { The_Browser_Wars_And_Antitrust, The_Browser_Wars_And_Antitrust_Duration, The_Browser_Wars_And_Antitrust_Edited } from './The_Browser_Wars_And_Antitrust';
-import { Diversification_And_New_Leadership, Diversification_And_New_Leadership_Duration, Diversification_And_New_Leadership_Edited } from './Diversification_And_New_Leadership';
-import { The_Cloud_First_Era, The_Cloud_First_Era_Duration, The_Cloud_First_Era_Edited } from './The_Cloud_First_Era';
+import { Intro, Intro_Duration, Intro_Edited } from './Intro';
+import { Lack_Of_Narrative, Lack_Of_Narrative_Duration, Lack_Of_Narrative_Edited } from './Lack_Of_Narrative';
+import { Repetitive_Structure, Repetitive_Structure_Duration, Repetitive_Structure_Edited } from './Repetitive_Structure';
+import { Simple_Humor, Simple_Humor_Duration, Simple_Humor_Edited } from './Simple_Humor';
+import { Target_Audience_Misalignment, Target_Audience_Misalignment_Duration, Target_Audience_Misalignment_Edited } from './Target_Audience_Misalignment';
 import { Conclusion, Conclusion_Duration, Conclusion_Edited } from './Conclusion';
-let files = [{name: The_Founding_Vision, duration: The_Founding_Vision_Duration, edited: The_Founding_Vision_Edited }, {name: The_MS_DOS_Revolution, duration: The_MS_DOS_Revolution_Duration, edited: The_MS_DOS_Revolution_Edited }, {name: Windows_Dominance, duration: Windows_Dominance_Duration, edited: Windows_Dominance_Edited }, {name: The_Browser_Wars_And_Antitrust, duration: The_Browser_Wars_And_Antitrust_Duration, edited: The_Browser_Wars_And_Antitrust_Edited }, {name: Diversification_And_New_Leadership, duration: Diversification_And_New_Leadership_Duration, edited: Diversification_And_New_Leadership_Edited }, {name: The_Cloud_First_Era, duration: The_Cloud_First_Era_Duration, edited: The_Cloud_First_Era_Edited }, {name: Conclusion, duration: Conclusion_Duration, edited: Conclusion_Edited }];
+import { Ending, Ending_Duration, Ending_Edited } from './Ending';
+let files = [{name: Intro, duration: Intro_Duration, edited: Intro_Edited }, {name: Lack_Of_Narrative, duration: Lack_Of_Narrative_Duration, edited: Lack_Of_Narrative_Edited }, {name: Repetitive_Structure, duration: Repetitive_Structure_Duration, edited: Repetitive_Structure_Edited }, {name: Simple_Humor, duration: Simple_Humor_Duration, edited: Simple_Humor_Edited }, {name: Target_Audience_Misalignment, duration: Target_Audience_Misalignment_Duration, edited: Target_Audience_Misalignment_Edited }, {name: Conclusion, duration: Conclusion_Duration, edited: Conclusion_Edited }, {name: Ending, duration: Ending_Duration, edited: Ending_Edited }];
 export default files;
