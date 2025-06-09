@@ -1,0 +1,17 @@
+. use export const function and the given exports. Make the video thats generated fancy, colorful, sleek, modern, easy to read etc. Also try not to use any images if possible. Make sure to not use any files that dont already exist on the users desktop. imports can ONLY be from remotion packages such as "remotion" OR "react". Be careful for <Composition> mounted inside another composition error. DO NOT USE COMPOSITION element. Also you can use tailwind classnames and make sure to specify the bg colors. Answer with the code as text ONLY. beware of the error outputRange must contain only numbers and check for it. Interpolate should not have ANY string elements in it, such as bg colors. watch out for this error too: TypeError(0 , remotion__WEBPACK_IMPORTED_MODULE_1__.useRemotionRoot) is not a function. double check for all errors and make sure the code can run first try and make sure it doesnt reset at like a "my comp remotion video" and make sure it actually addreses the user prompt but make sure it doenst cause an error on specific prompts that cause the website to crash. make sure Error: remotion__WEBPACK_IMPORTED_MODULE_2__.Easing.easeOut is not a function doesnt occur. Instead do something like easing: Easing.bezier(0.8, 0.22, 0.96, 0.65),it should be a make sure you know they're talking about microsoftHere's the template code:
+      //add any imports you want to use from remotion or react
+      export const The_Founding_Vision: React.FC = () => {
+  return (
+    <div className="w-full h-full bg-gray-100"> //later edit this div
+      <h1 className="">Welcome to MyComp</h1>
+      <p className="">
+        This is a sample introduction component for your Remotion project. You
+        can customize it as needed.
+      </p>
+    </div>
+  );
+};
+
+export const The_Founding_Vision_Duration = 360; // Duration in frames 30fps, change this to the duration you want for the section
+export const The_Founding_Vision_Edited = true; // Set to true if the section is edited
+      Make sure to leave a comment AIWASHERE at the top of the file. Leave a comment for a thorough description of the section. 
