@@ -2,20 +2,23 @@
 // This component visually represents the "Lack of Narrative" concept as described.
 // It uses on-screen text to directly explain the absence of meaningful plot,
 // character development, or overarching story arcs in the series.
-// To symbolize this narrative void, abstract, unresolving animated shapes are used.
-// These shapes appear and move aimlessly without clear paths or resolutions,
+// To symbolize this narrative void, instances of the provided image are used,
+// appearing and moving aimlessly without clear paths or resolutions,
 // floating against an expansive empty background to emphasize the absence of structure.
 // The design prioritizes a fancy, colorful, sleek, modern, and easy-to-read aesthetic
 // through the use of vibrant colors, clean typography, and subtle animations, all
 // implemented exclusively with Remotion's core features and Tailwind CSS.
-// No external images or files are used, adhering to the specified constraints.
+// The specified image is used, replacing previous abstract shapes to symbolize the narrative void.
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig, interpolate, Easing } from 'remotion';
+import { useCurrentFrame, useVideoConfig, interpolate, Easing, Img } from 'remotion'; // Added Img import
 
 export const Lack_Of_Narrative: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
+
+  // Define the image URL as requested
+  const skibidiToiletImage = 'https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/6a049550-6fe8-4c65-b7f8-19c030678238/2093367348/skibidi-toilet-tips-screenshot.png';
 
   // --- Main Text Animation ---
   const textOpacity = interpolate(
@@ -40,12 +43,12 @@ export const Lack_Of_Narrative: React.FC = () => {
     }
   );
 
-  // --- Abstract Shape Animations ---
-  // Each shape has independent, non-resolving animations for opacity, position, scale, and rotation.
+  // --- Image Animations ---
+  // Each image instance has independent, non-resolving animations for opacity, position, scale, and rotation.
   // This aims to create a feeling of aimless movement, symbolizing a lack of narrative direction.
 
-  // Shape 1 (Purple Circle)
-  const shape1Opacity = interpolate(
+  // Image 1 (replaces original Shape 1)
+  const image1Opacity = interpolate(
     frame,
     [0, 45, durationInFrames / 2, durationInFrames - 30],
     [0, 0.6, 0.6, 0], // Fades in, stays, fades out
@@ -55,15 +58,15 @@ export const Lack_Of_Narrative: React.FC = () => {
       easing: Easing.bezier(0.7, 0.1, 0.9, 0.5),
     }
   );
-  const shape1Transform = `
+  const image1Transform = `
     translateX(${interpolate(frame, [0, 90, 180, 270, durationInFrames], [-200, 100, -50, 200, -300], { easing: Easing.bezier(0.25, 0.46, 0.45, 0.94) })}px)
     translateY(${interpolate(frame, [0, 60, 150, 240, durationInFrames], [200, -100, 50, -200, 100], { easing: Easing.bezier(0.25, 0.46, 0.45, 0.94) })}px)
     scale(${interpolate(frame, [0, 120, 240, durationInFrames], [0.5, 1.2, 0.8, 0.3], { easing: Easing.bezier(0.25, 0.46, 0.45, 0.94) })})
     rotate(${interpolate(frame, [0, durationInFrames], [0, 360], { easing: Easing.linear })}deg)
   `;
 
-  // Shape 2 (Cyan Square)
-  const shape2Opacity = interpolate(
+  // Image 2 (replaces original Shape 2)
+  const image2Opacity = interpolate(
     frame,
     [60, 105, durationInFrames / 2 + 60, durationInFrames],
     [0, 0.7, 0.7, 0],
@@ -73,15 +76,15 @@ export const Lack_Of_Narrative: React.FC = () => {
       easing: Easing.bezier(0.7, 0.1, 0.9, 0.5),
     }
   );
-  const shape2Transform = `
+  const image2Transform = `
     translateX(${interpolate(frame, [60, 150, 240, 300, durationInFrames], [300, -150, 100, -200, 50], { easing: Easing.bezier(0.645, 0.045, 0.355, 1) })}px)
     translateY(${interpolate(frame, [60, 120, 210, 280, durationInFrames], [-100, 200, -50, 100, -200], { easing: Easing.bezier(0.645, 0.045, 0.355, 1) })}px)
     scale(${interpolate(frame, [60, 180, durationInFrames], [0.7, 1.1, 0.4], { easing: Easing.bezier(0.645, 0.045, 0.355, 1) })})
     rotate(${interpolate(frame, [60, durationInFrames], [0, -270], { easing: Easing.linear })}deg)
   `;
 
-  // Shape 3 (Rose Rounded Rectangle)
-  const shape3Opacity = interpolate(
+  // Image 3 (replaces original Shape 3)
+  const image3Opacity = interpolate(
     frame,
     [120, 165, durationInFrames - 60, durationInFrames - 15],
     [0, 0.5, 0.5, 0],
@@ -91,25 +94,25 @@ export const Lack_Of_Narrative: React.FC = () => {
       easing: Easing.bezier(0.7, 0.1, 0.9, 0.5),
     }
   );
-  const shape3Transform = `
+  const image3Transform = `
     translateX(${interpolate(frame, [120, 200, 280, durationInFrames], [0, 250, -100, 150], { easing: Easing.bezier(0.895, 0.03, 0.685, 0.22) })}px)
     translateY(${interpolate(frame, [120, 180, 250, durationInFrames], [0, -150, 100, -50], { easing: Easing.bezier(0.895, 0.03, 0.685, 0.22) })}px)
     scale(${interpolate(frame, [120, 240, durationInFrames], [0.6, 1.3, 0.5], { easing: Easing.bezier(0.895, 0.03, 0.685, 0.22) })})
     rotate(${interpolate(frame, [120, durationInFrames], [0, 180], { easing: Easing.linear })}deg)
   `;
 
-  // Shape 4 (Emerald Circle - appears later)
-  const shape4Opacity = interpolate(frame, [180, 225, durationInFrames - 15], [0, 0.4, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.7, 0.1, 0.9, 0.5) });
-  const shape4Transform = `
+  // Image 4 (replaces original Shape 4)
+  const image4Opacity = interpolate(frame, [180, 225, durationInFrames - 15], [0, 0.4, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.7, 0.1, 0.9, 0.5) });
+  const image4Transform = `
     translateX(${interpolate(frame, [180, durationInFrames], [0, 150])}px)
     translateY(${interpolate(frame, [180, durationInFrames], [0, -100])}px)
     scale(${interpolate(frame, [180, durationInFrames], [0.8, 1.1])})
     rotate(${interpolate(frame, [180, durationInFrames], [0, 90])}deg)
   `;
 
-  // Shape 5 (Orange Rectangle - appears even later)
-  const shape5Opacity = interpolate(frame, [240, 285, durationInFrames], [0, 0.5, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.7, 0.1, 0.9, 0.5) });
-  const shape5Transform = `
+  // Image 5 (replaces original Shape 5)
+  const image5Opacity = interpolate(frame, [240, 285, durationInFrames], [0, 0.5, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.bezier(0.7, 0.1, 0.9, 0.5) });
+  const image5Transform = `
     translateX(${interpolate(frame, [240, durationInFrames], [-100, 50])}px)
     translateY(${interpolate(frame, [240, durationInFrames], [0, 120])}px)
     scale(${interpolate(frame, [240, durationInFrames], [0.9, 1.2])})
@@ -119,47 +122,54 @@ export const Lack_Of_Narrative: React.FC = () => {
 
   return (
     <div className="w-full h-full bg-neutral-950 flex items-center justify-center p-8 relative overflow-hidden">
-      {/* Background Shapes: Positioned absolutely for visual interest and narrative void symbolism */}
-      <div
-        className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-600 rounded-full blur-sm"
+      {/* Background Images: Positioned absolutely for visual interest and narrative void symbolism */}
+      {/* Images are given 'object-cover' to ensure they fill their specified dimensions, and 'rounded-md' for a softer look */}
+      {/* Dimensions adjusted to reflect a wide rectangular image (width is double the height) */}
+      <Img
+        src={skibidiToiletImage}
+        className="absolute top-1/4 left-1/4 w-64 h-32 object-cover rounded-md" // Changed from w-32 h-32
         style={{
-          opacity: shape1Opacity,
-          transform: shape1Transform,
+          opacity: image1Opacity,
+          transform: image1Transform,
         }}
-      ></div>
-      <div
-        className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-cyan-500 rounded-md blur-sm"
+      />
+      <Img
+        src={skibidiToiletImage}
+        className="absolute bottom-1/4 right-1/4 w-80 h-40 object-cover rounded-md" // Changed from w-40 h-40
         style={{
-          opacity: shape2Opacity,
-          transform: shape2Transform,
+          opacity: image2Opacity,
+          transform: image2Transform,
         }}
-      ></div>
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-rose-500 rounded-lg blur-sm"
+      />
+      <Img
+        src={skibidiToiletImage}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 object-cover rounded-md" // Changed from w-24 h-24
         style={{
-          opacity: shape3Opacity,
-          transform: shape3Transform,
+          opacity: image3Opacity,
+          transform: image3Transform,
         }}
-      ></div>
-      <div
-        className="absolute top-1/3 left-1/3 w-20 h-20 bg-emerald-500 rounded-full blur-sm"
+      />
+      <Img
+        src={skibidiToiletImage}
+        className="absolute top-1/3 left-1/3 w-40 h-20 object-cover rounded-md" // Changed from w-20 h-20
         style={{
-          opacity: shape4Opacity,
-          transform: shape4Transform,
+          opacity: image4Opacity,
+          transform: image4Transform,
         }}
-      ></div>
-      <div
-        className="absolute bottom-1/3 right-1/3 w-16 h-16 bg-orange-400 rounded-sm blur-sm"
+      />
+      <Img
+        src={skibidiToiletImage}
+        className="absolute bottom-1/3 right-1/3 w-32 h-16 object-cover rounded-md" // Changed from w-16 h-16
         style={{
-          opacity: shape5Opacity,
-          transform: shape5Transform,
+          opacity: image5Opacity,
+          transform: image5Transform,
         }}
-      ></div>
+      />
 
 
       {/* Main Text Content: Centered and animated for focus */}
       <div
-        className="text-center max-w-3xl relative z-10" // z-10 ensures text is above shapes
+        className="text-center max-w-3xl relative z-10" // z-10 ensures text is above images
         style={{
           opacity: textOpacity,
           transform: `translateY(${textTranslateY}px)`,
@@ -170,7 +180,7 @@ export const Lack_Of_Narrative: React.FC = () => {
         </h1>
         <p className="text-3xl text-gray-300 font-light drop-shadow-md">
           This series intentionally lacks a meaningful plot, character development, or overarching story arcs.
-          Abstract, unresolving animated elements and expansive empty space serve as symbols for this narrative absence,
+          Instances of the provided image, alongside expansive empty space, serve as symbols for this narrative absence,
           reflecting a world without clear progression or ultimate resolution.
         </p>
       </div>

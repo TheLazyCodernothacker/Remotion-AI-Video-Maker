@@ -2,15 +2,14 @@
 // This section showcases "Simple Humor" as described in the prompt.
 // It features animated text phrases appearing sequentially, highlighting the key characteristics:
 // "Elementary Toilet Humor", "Simplistic Visual Gags", "Minimalistic Props", "Repetitive Actions", and "No Comedic Depth".
-// The visual elements are abstract representations of a "toilet" and a "camera" using simple
-// animated divs. These objects perform basic, repetitive movements to underscore the lack of comedic depth.
+// The visual elements are now actual images of a "toilet" and a "camera".
+// These objects perform basic, repetitive movements to underscore the lack of comedic depth.
 // The design is fancy, colorful, sleek, and modern, utilizing a vibrant color palette and
 // smooth animations driven by Remotion's spring and interpolate functions.
-// All animations avoid images and only use native browser elements and Remotion/React imports.
 // It strictly avoids the <Composition> element and ensures all interpolate functions output numbers.
 
 import React from 'react';
-import { useCurrentFrame, useVideoConfig, spring, interpolate, Easing } from 'remotion';
+import { useCurrentFrame, useVideoConfig, spring, interpolate, Easing, Img } from 'remotion'; // ADDED Img import
 
 export const Simple_Humor: React.FC = () => {
   const frame = useCurrentFrame();
@@ -112,6 +111,10 @@ export const Simple_Humor: React.FC = () => {
     extrapolateRight: "clamp"
   });
 
+  // Image URLs provided by the user
+  const skibidiToiletImage = "https://images.sftcdn.net/images/t_app-cover-l,f_auto/p/5aa007ca-17c1-4896-8040-f88acc774f67/1881255909/skibidi-toilet-z7k-How-to-play-Skibidi-Toilet-android.jpg";
+  const cameraManImage = "https://th.bing.com/th/id/OIP.I2Iuchoxsb99WGYfkYVtewHaNK?pid=ImgDet&w=188&h=333&c=7";
+
   return (
     <div
       className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden"
@@ -122,12 +125,13 @@ export const Simple_Humor: React.FC = () => {
         opacity: bgOpacity,
       }}
     >
-      {/* Toilet Prop - Abstract representation */}
-      <div
-        className="absolute flex flex-col items-center justify-center"
+      {/* Toilet Prop - Replaced with actual image */}
+      <Img
+        src={skibidiToiletImage}
+        className="absolute object-contain" // object-contain ensures the tall image fits without cropping
         style={{
-          width: 'min(30vw, 150px)', // Responsive width
-          height: 'min(30vw, 150px)', // Responsive height
+          width: 'min(30vw, 200px)', // Adjusted width to accommodate the image
+          height: 'min(50vh, 300px)', // Adjusted height to accommodate the image's tall aspect ratio
           bottom: '5%', // Position at the bottom
           left: '20%', // Position on the left side
           transform: `translateX(${toiletX}px) rotate(${toiletRotation}deg)`,
@@ -135,23 +139,15 @@ export const Simple_Humor: React.FC = () => {
           // Add a subtle shadow for depth
           filter: 'drop-shadow(0px 5px 10px rgba(0,0,0,0.5))',
         }}
-      >
-        {/* Toilet tank */}
-        <div className="w-2/3 h-1/4 bg-gray-600 rounded-t-lg border-b-2 border-gray-700"></div>
-        {/* Toilet bowl top (seat) */}
-        <div className="w-full h-1/4 bg-gray-400 rounded-t-full rounded-b-lg border-2 border-gray-500 relative -mt-2">
-            <div className="absolute inset-1 bg-gray-200 rounded-t-full rounded-b-lg"></div> {/* Inner ring */}
-        </div>
-        {/* Toilet base */}
-        <div className="w-4/5 h-1/2 bg-gray-300 rounded-b-full border-2 border-gray-500 relative -mt-2"></div>
-      </div>
+      />
 
-      {/* Camera Prop - Abstract representation */}
-      <div
-        className="absolute bg-gray-700 rounded-lg flex items-center justify-center p-2"
+      {/* Camera Prop - Replaced with actual image */}
+      <Img
+        src={cameraManImage}
+        className="absolute object-contain" // object-contain ensures the tall image fits without cropping
         style={{
-          width: 'min(25vw, 120px)', // Responsive width
-          height: 'min(20vw, 100px)', // Responsive height
+          width: 'min(25vw, 150px)', // Adjusted width to accommodate the image
+          height: 'min(40vh, 250px)', // Adjusted height to accommodate the image's tall aspect ratio
           top: '5%', // Position at the top
           right: '20%', // Position on the right side
           transform: `translateX(${cameraX}px) scale(${cameraScale})`,
@@ -159,15 +155,7 @@ export const Simple_Humor: React.FC = () => {
           // Add a subtle shadow for depth
           filter: 'drop-shadow(0px 5px 10px rgba(0,0,0,0.5))',
         }}
-      >
-        {/* Lens barrel */}
-        <div className="w-2/3 h-2/3 rounded-full bg-black flex items-center justify-center">
-          {/* Lens glass */}
-          <div className="w-1/2 h-1/2 rounded-full bg-gray-800 border-2 border-white"></div>
-        </div>
-        {/* Viewfinder */}
-        <div className="absolute top-2 right-2 w-1/4 h-1/5 bg-gray-500 rounded-sm"></div>
-      </div>
+      />
 
       {/* Render each text phrase with its animation */}
       {textData.map((item, index) => {

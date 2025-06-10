@@ -2,18 +2,18 @@
 // This Intro component sets the stage for a critical look at "Skibidi Toilet".
 // It features a dynamic title reveal with glitch effects, emphasizing a disruptive and
 // slightly unsettling tone. A countdown timer builds anticipation for the arguments
-// to follow. The design is sleek, modern, and uses a vibrant, contrasting color palette
-// to create a visually striking and easy-to-read experience without relying on images.
+// to follow. The design is sleek, modern, and uses a vibrant, contrasting color palette, now enhanced with a relevant background image
+// to create a visually striking and easy-to-read experience.
 // Animations are carefully crafted using Remotion's interpolate and spring functions
 // to ensure a smooth yet impactful visual flow, while specifically avoiding common
 // interpolation errors with string values or incorrect Easing functions.
 import React from 'react';
-import { useCurrentFrame, interpolate, Easing, spring, AbsoluteFill } from 'remotion';
+import { useCurrentFrame, interpolate, Easing, AbsoluteFill, spring } from 'remotion';
 
 export const Intro: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const backgroundColor = 'bg-gray-950'; // Very dark, almost black, for a modern, sleek look
+  // The original backgroundColor variable is no longer needed as an image will be used.
 
   // Title reveal animation using spring for a natural, bouncy entry
   const titleSpring = spring({
@@ -82,7 +82,7 @@ export const Intro: React.FC = () => {
     [countdownStartFrame, countdownEndFrame],
     [5, 0], // Counts down from 5 to 0
     {
-      easing: Easing.bezier(0.8, 0.22, 0.96, 0.65),
+      easing: Easing.linear, // Changed to linear for a consistent, non-ugly count
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     }
@@ -100,11 +100,35 @@ export const Intro: React.FC = () => {
     }
   );
 
+  // New: Interpolate the countdown glow based on its visibility, ensuring it doesn't loop
+  const countdownGlowOpacity = interpolate(
+    frame,
+    [countdownStartFrame, countdownStartFrame + 15, countdownEndFrame - 15, countdownEndFrame],
+    [0, 1, 1, 0], // Glow fades in with number, stays, then fades out cleanly
+    {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }
+  );
+
   // Text color for the main title, chosen for impact and contrast
   const textColor = 'text-red-500'; // A bold, critical red
 
+  // The direct image URL for the background
+  const imageUrl = 'https://s.yimg.com/os/creatr-uploaded-images/2024-07/85ddd7c0-4a8c-11ef-b9f5-07b577d66415';
+
   return (
-    <AbsoluteFill className={`${backgroundColor} flex flex-col items-center justify-center font-sans overflow-hidden`}>
+    <AbsoluteFill
+      className={`flex flex-col items-center justify-center font-sans overflow-hidden`}
+      style={{
+        backgroundImage: `url('${imageUrl}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        // Add a semi-transparent dark overlay to improve text readability
+        backgroundColor: 'rgba(0, 0, 0, 0.4)', // This will blend with the image
+        backgroundBlendMode: 'darken', // Blend mode for the background color overlay
+      }}
+    >
       {/* Dynamic Title Card */}
       <h1
         className={`text-7xl md:text-8xl lg:text-9xl font-extrabold ${textColor} text-center leading-tight tracking-tighter`}
@@ -136,13 +160,14 @@ export const Intro: React.FC = () => {
       {/* Countdown Timer */}
       {displayedCountdown > 0 && ( // Only render if countdown is positive
         <div
-          className="text-red-500 text-8xl md:text-9xl lg:text-[10rem] font-bold mt-16 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full w-48 h-48 md:w-64 md:h-64 flex items-center justify-center shadow-lg"
+          className="text-red-500 text-8xl md:text-9xl lg:text-[10rem] font-bold mt-16 rounded-full w-48 h-48 md:w-64 md:h-64 flex items-center justify-center border-4 border-red-500 bg-black bg-opacity-30" // Changed background and added a border for a cleaner look
           style={{
             opacity: countdownOpacity,
-            // Scale animation for a subtle pulse effect
-            transform: `scale(${interpolate(frame, [countdownStartFrame, countdownEndFrame], [1.2, 0.8], { easing: Easing.bezier(0.8, 0.22, 0.96, 0.65) })})`,
-            // Dynamic box shadow for a pulsating glow effect, using interpolated numeric alpha
-            boxShadow: `0 0 20px 5px rgba(255, 0, 0, ${interpolate(frame % 30, [0, 15, 30], [0.3, 0.8, 0.3], { extrapolateRight: 'clamp' })})`,
+            // Removed the old scale animation for the countdown
+            // New box-shadow for cleaner glow, fading with the countdown visibility, ensuring it doesn't loop
+            boxShadow: `0 0 30px 10px rgba(255, 0, 0, ${countdownGlowOpacity * 0.7})`, 
+            // Added text shadow to the number itself for a consistent glow effect
+            textShadow: `0 0 15px rgba(255, 0, 0, ${countdownGlowOpacity * 0.9}), 0 0 30px rgba(255, 0, 0, ${countdownGlowOpacity * 0.5})`,
           }}
         >
           {displayedCountdown}
@@ -168,5 +193,5 @@ export const Intro: React.FC = () => {
   );
 };
 
-export const Intro_Duration = 360; // Duration in frames (30 frames per second, so 12 seconds)
+export const Intro_Duration = 330; // Duration in frames (30 frames per second, so 11 seconds). Ends shortly after countdown completes.
 export const Intro_Edited = true; // Set to true if the section is edited
