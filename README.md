@@ -8,10 +8,12 @@ Start by installing the packages:
 npm i
 ```
 
-Then run these two commands:
+Then run these two commands in two different terminals:
 
 ```
 npm run remotion
+```
+```
 npm run dev
 ```
 
