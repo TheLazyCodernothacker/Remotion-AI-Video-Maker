@@ -1,88 +1,36 @@
-<img src="https://github.com/remotion-dev/template-next/assets/1629785/9092db5f-7c0c-4d38-97c4-5f5a61f5cc098" />
-<br/>
-<br/>
+This is the Remotion AI Video Maker powered by Gemini API
 
-This is a Next.js template for building programmatic video apps, with [`@remotion/player`](https://remotion.dev/player) and [`@remotion/lambda`](https://remotion.dev/lambda) built in.
+1. Getting started
 
-This template uses the Next.js App directory, with TailwindCSS. There is a [Non-TailwindCSS version](https://github.com/remotion-dev/template-next-app-dir), and a [Pages directory version](https://github.com/remotion-dev/template-next-pages-dir) of this template available.
-
-<img src="https://github.com/remotion-dev/template-next/assets/1629785/c9c2e5ca-2637-4ec8-8e40-a8feb5740d88" />
-
-## Getting Started
-
-[Use this template](https://github.com/new?template_name=template-next-app-dir-tailwind&template_owner=remotion-dev) to clone it into your GitHub account. Run
+Start by installing the packages:
 
 ```
 npm i
 ```
 
-afterwards. Alternatively, use this command to scaffold a project:
+Then run these two commands:
 
 ```
-npx create-video@latest --next-tailwind
-```
-
-## Commands
-
-Start the Next.js dev server:
-
-```
+npm run remotion
 npm run dev
 ```
 
-Open the Remotion Studio:
+The first one starts the video server, and the second starts the frontend where you'll make the video
+
+1. Making the video
+
+On the frontend generate an outline, and then it will create each section with a default prompt
+
+Afterwards for each section you can use that prompt or edit it to generate that video section.
+
+Finally you can constantly give suggestions until you are satisfied with the section.
+
+1. More details
+
+If the video section has a bug and it makes it so you can't give suggestions to fix it, either go to /api/reset/ and if that doesn't work then run:
 
 ```
-npx remotion studio
+npm run reset
 ```
 
-Render a video locally:
-
-```
-npx remotion render
-```
-
-Upgrade Remotion:
-
-```
-npx remotion upgrade
-```
-
-The following script will set up your Remotion Bundle and Lambda function on AWS:
-
-```
-node deploy.mjs
-```
-
-You should run this script after:
-
-- changing the video template
-- changing `config.mjs`
-- upgrading Remotion to a newer version
-
-## Set up rendering on AWS Lambda
-
-This template supports rendering the videos via [Remotion Lambda](https://remotion.dev/lambda).
-
-1. Copy the `.env.example` file to `.env` and fill in the values.
-   Complete the [Lambda setup guide](https://www.remotion.dev/docs/lambda/setup) to get your AWS credentials.
-
-1. Edit the `config.mjs` file to your desired Lambda settings.
-
-1. Run `node deploy.mjs` to deploy your Lambda function and Remotion Bundle.
-
-## Docs
-
-Get started with Remotion by reading the [fundamentals page](https://www.remotion.dev/docs/the-fundamentals).
-
-## Help
-
-We provide help on our [Discord server](https://remotion.dev/discord).
-
-## Issues
-
-Found an issue with Remotion? [File an issue here](https://remotion.dev/issue).
-
-## License
-
-Note that for some entities a company license is needed. [Read the terms here](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).
+and yay.
