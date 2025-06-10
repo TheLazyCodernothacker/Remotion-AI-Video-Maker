@@ -1,10 +1,10 @@
 import React from 'react';
 import { Intro, Intro_Duration, Intro_Edited } from './Intro';
-import { Lack_Of_Narrative, Lack_Of_Narrative_Duration, Lack_Of_Narrative_Edited } from './Lack_Of_Narrative';
-import { Repetitive_Structure, Repetitive_Structure_Duration, Repetitive_Structure_Edited } from './Repetitive_Structure';
-import { Simple_Humor, Simple_Humor_Duration, Simple_Humor_Edited } from './Simple_Humor';
-import { Target_Audience_Misalignment, Target_Audience_Misalignment_Duration, Target_Audience_Misalignment_Edited } from './Target_Audience_Misalignment';
+import { Early_Life_And_Rise, Early_Life_And_Rise_Duration, Early_Life_And_Rise_Edited } from './Early_Life_And_Rise';
+import { Goal_Scoring_Prowess, Goal_Scoring_Prowess_Duration, Goal_Scoring_Prowess_Edited } from './Goal_Scoring_Prowess';
+import { Major_Trophies_And_Individual_Awards, Major_Trophies_And_Individual_Awards_Duration, Major_Trophies_And_Individual_Awards_Edited } from './Major_Trophies_And_Individual_Awards';
+import { Longevity_And_Adaptability, Longevity_And_Adaptability_Duration, Longevity_And_Adaptability_Edited } from './Longevity_And_Adaptability';
+import { Impact_And_Influence, Impact_And_Influence_Duration, Impact_And_Influence_Edited } from './Impact_And_Influence';
 import { Conclusion, Conclusion_Duration, Conclusion_Edited } from './Conclusion';
-import { Ending, Ending_Duration, Ending_Edited } from './Ending';
-let files = [{name: Intro, duration: Intro_Duration, edited: Intro_Edited }, {name: Lack_Of_Narrative, duration: Lack_Of_Narrative_Duration, edited: Lack_Of_Narrative_Edited }, {name: Repetitive_Structure, duration: Repetitive_Structure_Duration, edited: Repetitive_Structure_Edited }, {name: Simple_Humor, duration: Simple_Humor_Duration, edited: Simple_Humor_Edited }, {name: Target_Audience_Misalignment, duration: Target_Audience_Misalignment_Duration, edited: Target_Audience_Misalignment_Edited }, {name: Conclusion, duration: Conclusion_Duration, edited: Conclusion_Edited }, {name: Ending, duration: Ending_Duration, edited: Ending_Edited }];
+let files = [{name: Intro, duration: Intro_Duration, edited: Intro_Edited }, {name: Early_Life_And_Rise, duration: Early_Life_And_Rise_Duration, edited: Early_Life_And_Rise_Edited }, {name: Goal_Scoring_Prowess, duration: Goal_Scoring_Prowess_Duration, edited: Goal_Scoring_Prowess_Edited }, {name: Major_Trophies_And_Individual_Awards, duration: Major_Trophies_And_Individual_Awards_Duration, edited: Major_Trophies_And_Individual_Awards_Edited }, {name: Longevity_And_Adaptability, duration: Longevity_And_Adaptability_Duration, edited: Longevity_And_Adaptability_Edited }, {name: Impact_And_Influence, duration: Impact_And_Influence_Duration, edited: Impact_And_Influence_Edited }, {name: Conclusion, duration: Conclusion_Duration, edited: Conclusion_Edited }];
 export default files;
